@@ -28,7 +28,6 @@ app.use(express.json());
 // acceses to frontend 
 app.use(cors({
   origin: 'https://blog-f-one.vercel.app/', // 👈 replace with the site you want to allow
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 
