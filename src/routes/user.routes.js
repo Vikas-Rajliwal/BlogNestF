@@ -27,7 +27,7 @@ console.log("userid", user._id);
     res.cookie("token", token, {
       httpOnly: false,
       secure: false,
-      sameSite: None,
+      sameSite: 'None',
       path: "/",
     });
 
@@ -35,14 +35,14 @@ console.log("userid", user._id);
       httpOnly: false,
       secure: false,
 
-      sameSite: None,
+      sameSite: 'None',
       
       path: "/",
     });
     res.cookie("Id", String(user._id), {
       httpOnly: false,
       secure: false,
-      sameSite: None,
+      sameSite: 'None',
       path: "/",
     });
 
