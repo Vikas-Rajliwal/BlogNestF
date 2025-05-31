@@ -25,23 +25,23 @@ router.post("/signin", async (req, res) => {
 console.log("userid", user._id);
     // First, set cookies
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
       sameSite: 'None',
       path: "/",
     });
 
     res.cookie("userName", user.fullName, {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
 
       sameSite: 'None',
       
       path: "/",
     });
     res.cookie("Id", String(user._id), {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
       sameSite: 'None',
       path: "/",
     });
