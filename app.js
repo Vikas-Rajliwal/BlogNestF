@@ -28,7 +28,7 @@ app.use(express.json());
 // acceses to frontend 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://blognestr.onrender.com"],
+    origin: ["http://localhost:5173", "https://blog-f-one.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
