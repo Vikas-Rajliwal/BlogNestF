@@ -27,10 +27,10 @@ app.use(express.json());
 
 // acceses to frontend 
 app.use(cors({
-  origin: 'https://blog-f-one.vercel.app', // 👈 replace with the site you want to allow
+  origin: ["http://localhost:5173"], // 👈 replace with the site you want to allow
   credentials: true,
 }));
-
+// 'https://blog-f-one.vercel.app' ,
 // users routers
 app.use("/api/v1/user",userRoute);
 // blogs routers
