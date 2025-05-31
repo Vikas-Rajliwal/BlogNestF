@@ -26,13 +26,11 @@ app.use(express.json());
 
 
 // acceses to frontend 
-app.use(
-  cors({
-    origin: [ "https://blog-f-one.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: 'https://blog-f-one.vercel.app/', // 👈 replace with the site you want to allow
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 
 // users routers
 app.use("/api/v1/user",userRoute);
