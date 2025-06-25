@@ -70,40 +70,52 @@
 // export default NavBar;
 
 import "./NavBar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useLocation } from "react-router-dom"; // Import useLocation for location tracking
+
 function NavBar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-const location = useLocation();
+  const location = useLocation();
 
-useEffect(() => {
-  const token = Cookies.get("token");
-  const storedUserName = Cookies.get("userName");
+  useEffect(() => {
+    const updateAuth = () => {
+      const token = Cookies.get("token");
+      const storedUserName = Cookies.get("userName");
 
-  if (token) {
-    setIsAuthenticated(true);
-    setUserName(storedUserName || "");
-  } else {
-    setIsAuthenticated(false);
-    setUserName("");
-  }
-}, [location]);
+      if (token) {
+        setIsAuthenticated(true);
+        setUserName(storedUserName || "");
+      } else {
+        setIsAuthenticated(false);
+        setUserName("");
+      }
+    };
+
+    updateAuth(); // run once on load
+
+    // Listen to custom auth change events
+    window.addEventListener("authChanged", updateAuth);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("authChanged", updateAuth);
+    };
+  }, [location]);
 
   const handleLogout = () => {
     Cookies.remove("token");
     Cookies.remove("userName");
-    setIsAuthenticated(false);
-    setUserName("");
-    setMenuOpen(false); // close menu on logout
-    navigate("/",{ replace: true }); // Redirect to home
+
+    window.dispatchEvent(new Event("authChanged")); // notify NavBar
+
+    setMenuOpen(false);
+    navigate("/", { replace: true });
   };
 
-  // Close menu when clicking a link (optional)
   const handleLinkClick = () => {
     setMenuOpen(false);
   };
@@ -116,7 +128,6 @@ useEffect(() => {
         </Link>
       </div>
 
-      {/* Hamburger icon */}
       <div
         className={`hamburger ${menuOpen ? "open" : ""}`}
         onClick={() => setMenuOpen(!menuOpen)}
@@ -126,7 +137,6 @@ useEffect(() => {
         <div></div>
       </div>
 
-      {/* Navbar links with toggle class */}
       <ul className={`navbar__links ${menuOpen ? "active" : ""}`}>
         <li>
           <Link to="/" onClick={handleLinkClick}>
