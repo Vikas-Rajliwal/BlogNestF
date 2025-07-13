@@ -1,0 +1,39 @@
+/* Container for Like button and like count */
+.like-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.5rem 0.5rem 1.5rem;
+}
+
+/* Main like button style */
+.icon-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ff4d6d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.icon-button:hover {
+  background-color: #e84361;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+/* Like count text */
+.like-count {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
