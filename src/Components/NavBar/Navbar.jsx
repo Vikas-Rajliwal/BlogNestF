@@ -87,7 +87,8 @@ function NavBar() {
     const checkAuthStatus = () => {
       const token = Cookies.get("token");
       const storedUserName = Cookies.get("userName");
-
+     console.log("Token:", token);
+      console.log("Stored UserName:", storedUserName);
       if (token) {
         setIsAuthenticated(true);
         setUserName(storedUserName || "");
